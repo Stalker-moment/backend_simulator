@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Account {
+  id        String   @id @default(uuid()) // Using UUID for a standard GUID
+  email     String   @unique
+  password  String
+  role      String   @default("user")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  contact   Contact?
+}
+
+model Contact {
+  id        String   @id @default(uuid()) // Assuming UUID for a unique identifier
+  firstName String
+  lastName  String
+  email     String   @unique
+  phone     String
+  noReg     String?
+  profile   String?  @default("/default.jpg")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  account   Account  @relation(fields: [id], references: [id])
+}
+
+model deviceAC {
+  id        Int      @id @default(autoincrement()) // Integer ID with auto-increment
+  timestamp DateTime @default(now())
+  SSID      String
+  PASSWORD  String
+  IP        String
+  updatedAt DateTime @updatedAt
+}
+
+model LogsAC {
+  id        Int      @id @default(autoincrement()) // Integer ID with auto-increment
+  timestamp DateTime @default(now())
+  voltage   Float    @default(0)
+  current   Float    @default(0)
+  power     Float    @default(0)
+  watthours Float    @default(0)
+  energy    Float    @default(0)
+  frequency Float    @default(0)
+  PF        Float    @default(0)
+  temp      Float    @default(0)
+  hum       Float    @default(0)
+  door      Boolean  @default(false)
+  updatedAt DateTime @updatedAt
+}
+
+model SensorAC {
+  id        Int      @id @default(autoincrement()) // Integer ID with auto-increment
+  timestamp DateTime @default(now())
+  voltage   Float    @default(0)
+  current   Float    @default(0)
+  power     Float    @default(0)
+  watthours Float    @default(0)
+  energy    Float    @default(0)
+  frequency Float    @default(0)
+  PF        Float    @default(0)
+  temp      Float    @default(0)
+  hum       Float    @default(0)
+  door      Boolean  @default(false)
+  updatedAt DateTime @updatedAt
+}
+
+model OutputAC {
+  id        Int      @id @default(autoincrement())
+  timestamp DateTime @default(now())
+  AC        Boolean  @default(false)
+  purifier  Boolean  @default(false)
+  fan       Boolean  @default(false)
+  lamp      Boolean  @default(false)
+  updatedAt DateTime @updatedAt
+}
