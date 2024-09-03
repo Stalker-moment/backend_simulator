@@ -29,6 +29,7 @@ model Contact {
   firstName String
   lastName  String
   email     String   @unique
+  
   phone     String
   noReg     String?
   profile   String?  @default("/default.jpg")
@@ -81,6 +82,7 @@ model SensorAC {
 model OutputAC {
   id        Int      @id @default(autoincrement())
   timestamp DateTime @default(now())
+  Auto      Boolean  @default(false)
   AC        Boolean  @default(false)
   purifier  Boolean  @default(false)
   fan       Boolean  @default(false)

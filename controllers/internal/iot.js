@@ -125,7 +125,7 @@ router.get(
   }
 );
 
-router.post("/switch/relay1", async (req, res) => {
+router.post("/output/auto", async (req, res) => {
   let value = req.body.value;
 
   if (value === null) {
@@ -134,27 +134,29 @@ router.post("/switch/relay1", async (req, res) => {
 
   try {
     //check value before update
-    const DataBefore = await prisma.relay.findFirst();
+    const DataBefore = await prisma.outputAC.findFirst();
 
-    const relay = await prisma.relay.upsert({
+    const outputAC = await prisma.outputAC.upsert({
       where: { id: 1 },
       update: {
-        relay1: value,
-        relay2: DataBefore.relay2,
-        relay3: DataBefore.relay3,
-        relay4: DataBefore.relay4,
+        Auto: value,
+        AC: DataBefore.AC,
+        purifier: DataBefore.purifier,
+        fan: DataBefore.fan,
+        lamp: DataBefore.lamp,
       },
       create: {
-        relay1: value,
-        relay2: DataBefore.relay2,
-        relay3: DataBefore.relay3,
-        relay4: DataBefore.relay4,
+        Auto: value,
+        AC: DataBefore.AC,
+        purifier: DataBefore.purifier,
+        fan: DataBefore.fan,
+        lamp: DataBefore.lamp,
       },
     });
 
     return res.status(200).json({
-      message: "Data relay updated successfully",
-      relay,
+      message: "Data outputAC updated successfully",
+      outputAC,
     });
   } catch (error) {
     console.error(error);
@@ -162,7 +164,7 @@ router.post("/switch/relay1", async (req, res) => {
   }
 });
 
-router.post("/switch/relay2", async (req, res) => {
+router.post("/output/ac", async (req, res) => {
   let value = req.body.value;
 
   if (value === null) {
@@ -171,27 +173,29 @@ router.post("/switch/relay2", async (req, res) => {
 
   try {
     //check value before update
-    const DataBefore = await prisma.relay.findFirst();
+    const DataBefore = await prisma.outputAC.findFirst();
 
-    const relay = await prisma.relay.upsert({
+    const outputAC = await prisma.outputAC.upsert({
       where: { id: 1 },
       update: {
-        relay1: DataBefore.relay1,
-        relay2: value,
-        relay3: DataBefore.relay3,
-        relay4: DataBefore.relay4,
+        Auto: DataBefore.Auto,
+        AC: value,
+        purifier: DataBefore.purifier,
+        fan: DataBefore.fan,
+        lamp: DataBefore.lamp,
       },
       create: {
-        relay1: DataBefore.relay1,
-        relay2: value,
-        relay3: DataBefore.relay3,
-        relay4: DataBefore.relay4,
+        Auto: DataBefore.Auto,
+        AC: value,
+        purifier: DataBefore.purifier,
+        fan: DataBefore.fan,
+        lamp: DataBefore.lamp,
       },
     });
 
     return res.status(200).json({
-      message: "Data relay updated successfully",
-      relay,
+      message: "Data outputAC updated successfully",
+      outputAC,
     });
   } catch (error) {
     console.error(error);
@@ -199,7 +203,7 @@ router.post("/switch/relay2", async (req, res) => {
   }
 });
 
-router.post("/switch/relay3", async (req, res) => {
+router.post("/output/purifier", async (req, res) => {
   let value = req.body.value;
 
   if (value === null) {
@@ -208,27 +212,29 @@ router.post("/switch/relay3", async (req, res) => {
 
   try {
     //check value before update
-    const DataBefore = await prisma.relay.findFirst();
+    const DataBefore = await prisma.outputAC.findFirst();
 
-    const relay = await prisma.relay.upsert({
+    const outputAC = await prisma.outputAC.upsert({
       where: { id: 1 },
       update: {
-        relay1: DataBefore.relay1,
-        relay2: DataBefore.relay2,
-        relay3: value,
-        relay4: DataBefore.relay4,
+        Auto: DataBefore.Auto,
+        AC: DataBefore.AC,
+        purifier: value,
+        fan: DataBefore.fan,
+        lamp: DataBefore.lamp,
       },
       create: {
-        relay1: DataBefore.relay1,
-        relay2: DataBefore.relay2,
-        relay3: value,
-        relay4: DataBefore.relay4,
+        Auto: DataBefore.Auto,
+        AC: DataBefore.AC,
+        purifier: value,
+        fan: DataBefore.fan,
+        lamp: DataBefore.lamp,
       },
     });
 
     return res.status(200).json({
-      message: "Data relay updated successfully",
-      relay,
+      message: "Data outputAC updated successfully",
+      outputAC,
     });
   } catch (error) {
     console.error(error);
@@ -236,7 +242,7 @@ router.post("/switch/relay3", async (req, res) => {
   }
 });
 
-router.post("/switch/relay4", async (req, res) => {
+router.post("/output/fan", async (req, res) => {
   let value = req.body.value;
 
   if (value === null) {
@@ -245,27 +251,29 @@ router.post("/switch/relay4", async (req, res) => {
 
   try {
     //check value before update
-    const DataBefore = await prisma.relay.findFirst();
+    const DataBefore = await prisma.outputAC.findFirst();
 
-    const relay = await prisma.relay.upsert({
+    const outputAC = await prisma.outputAC.upsert({
       where: { id: 1 },
       update: {
-        relay1: DataBefore.relay1,
-        relay2: DataBefore.relay2,
-        relay3: DataBefore.relay3,
-        relay4: value,
+        Auto: DataBefore.Auto,
+        AC: DataBefore.AC,
+        purifier: DataBefore.purifier,
+        fan: value,
+        lamp: DataBefore.lamp,
       },
       create: {
-        relay1: DataBefore.relay1,
-        relay2: DataBefore.relay2,
-        relay3: DataBefore.relay3,
-        relay4: value,
+        Auto: DataBefore.Auto,
+        AC: DataBefore.AC,
+        purifier: DataBefore.purifier,
+        fan: value,
+        lamp: DataBefore.lamp,
       },
     });
 
     return res.status(200).json({
-      message: "Data relay updated successfully",
-      relay,
+      message: "Data outputAC updated successfully",
+      outputAC,
     });
   } catch (error) {
     console.error(error);
@@ -273,17 +281,56 @@ router.post("/switch/relay4", async (req, res) => {
   }
 });
 
-//get data from relay (GET)
-router.get("/relay", async (req, res) => {
+router.post("/output/lamp", async (req, res) => {
+  let value = req.body.value;
+
+  if (value === null) {
+    return res.status(400).json({ error: "Invalid value" });
+  }
+
   try {
-    const relay = await prisma.relay.findFirst({
+    //check value before update
+    const DataBefore = await prisma.outputAC.findFirst();
+
+    const outputAC = await prisma.outputAC.upsert({
+      where: { id: 1 },
+      update: {
+        Auto: DataBefore.Auto,
+        AC: DataBefore.AC,
+        purifier: DataBefore.purifier,
+        fan: DataBefore.fan,
+        lamp: value,
+      },
+      create: {
+        Auto: DataBefore.Auto,
+        AC: DataBefore.AC,
+        purifier: DataBefore.purifier,
+        fan: DataBefore.fan,
+        lamp: value,
+      },
+    });
+
+    return res.status(200).json({
+      message: "Data outputAC updated successfully",
+      outputAC,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+//get data from outputAC (GET)
+router.get("/output", async (req, res) => {
+  try {
+    const outputAC = await prisma.outputAC.findFirst({
       orderBy: {
         updatedAt: "desc",
       },
     });
 
     return res.status(200).json({
-      relay,
+      outputAC,
     });
   } catch (error) {
     console.error(error);
