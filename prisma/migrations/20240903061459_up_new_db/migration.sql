@@ -1,0 +1,99 @@
+-- CreateTable
+CREATE TABLE "Account" (
+    "id" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "role" TEXT NOT NULL DEFAULT 'user',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Account_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Contact" (
+    "id" TEXT NOT NULL,
+    "firstName" TEXT NOT NULL,
+    "lastName" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "phone" TEXT NOT NULL,
+    "noReg" TEXT,
+    "profile" TEXT DEFAULT '/default.jpg',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Contact_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "deviceAC" (
+    "id" SERIAL NOT NULL,
+    "timestamp" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "SSID" TEXT NOT NULL,
+    "PASSWORD" TEXT NOT NULL,
+    "IP" TEXT NOT NULL,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "deviceAC_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "LogsAC" (
+    "id" SERIAL NOT NULL,
+    "timestamp" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "voltage" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "current" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "power" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "watthours" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "energy" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "frequency" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "PF" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "temp" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "hum" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "door" BOOLEAN NOT NULL DEFAULT false,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "LogsAC_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "SensorAC" (
+    "id" SERIAL NOT NULL,
+    "timestamp" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "voltage" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "current" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "power" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "watthours" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "energy" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "frequency" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "PF" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "temp" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "hum" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "door" BOOLEAN NOT NULL DEFAULT false,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "SensorAC_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "OutputAC" (
+    "id" SERIAL NOT NULL,
+    "timestamp" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "Auto" BOOLEAN NOT NULL DEFAULT false,
+    "AC" BOOLEAN NOT NULL DEFAULT false,
+    "purifier" BOOLEAN NOT NULL DEFAULT false,
+    "fan" BOOLEAN NOT NULL DEFAULT false,
+    "lamp" BOOLEAN NOT NULL DEFAULT false,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "OutputAC_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Account_email_key" ON "Account"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Contact_email_key" ON "Contact"("email");
+
+-- AddForeignKey
+ALTER TABLE "Contact" ADD CONSTRAINT "Contact_id_fkey" FOREIGN KEY ("id") REFERENCES "Account"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
